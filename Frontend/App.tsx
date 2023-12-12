@@ -2,14 +2,27 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import CustomizedButton from './src/components/button';
 import { useState } from 'react';
+import HomeScreen from './src/pages/HomeScreen';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Profile from './src/pages/Profile';
 
+
+const Stack = createNativeStackNavigator();
 export default function App() {
-  const [name,setName]= useState('Seif');
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app! {name}</Text>
-      <CustomizedButton title='Hello!' onPress={(event)=>setName('Hello Again')} />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{animation:'fade',headerLargeTitle:true,statusBarColor:'#31304D', header:()=><></>}}
+          // options={{title: 'Welcome'}}
+        />
+        <Stack.Screen name="profile" component={Profile} />
+      </Stack.Navigator>
+
+    </NavigationContainer>
   );
 }
 

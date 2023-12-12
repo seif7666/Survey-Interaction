@@ -1,14 +1,42 @@
-import React, { ReactNode } from "react";
-import { Button, GestureResponderEvent, View } from "react-native";
+import React, { ReactNode, useState } from "react";
+import { Pressable, GestureResponderEvent, View, Text } from "react-native";
 
+type CustomizedButtonType = {
+  title: string;
+  onPress: (event: GestureResponderEvent) => void;
+  buttonStyle?: any;
+  textStyle?: any;
+  onHoverStyle?: string;
+};
+const CustomizedButton = (props: CustomizedButtonType): ReactNode => {
+  const [style, setStyle] = useState(props.buttonStyle);
+  const originalColor = style.backgroundColor;
 
-type CustomizedButtonType={
-    title:string;
-    onPress:(event:GestureResponderEvent)=>void;
-    styles?:any    
-}
-const CustomizedButton= (props:CustomizedButtonType):ReactNode=>{
-    return <View style={props.styles}><Button onPress={props.onPress} title={props.title}/></View>
-}
+  const setNewColor = (newColor: string) => {
+    const newState = { ...style };
+    newState.backgroundColor = newColor;
+        console.log(style);
+
+    setStyle(newState);
+    console.log(style);
+  };
+  const inHover = (e: any) => {
+    if (props.onHoverStyle == null) return;
+    setNewColor(props.onHoverStyle);
+  };
+  const outHover = (e: any) => {
+    if (props.onHoverStyle == null) 
+        return;
+    setNewColor(originalColor);
+  };
+  return (
+    <Pressable onPress={props.onPress} 
+    onTouchStart={inHover}
+    onTouchEnd={outHover}
+    style={style}>
+      <Text style={props.textStyle}>{props.title}</Text>
+    </Pressable>
+  );
+};
 
 export default CustomizedButton;
