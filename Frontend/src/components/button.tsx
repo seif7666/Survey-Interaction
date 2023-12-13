@@ -15,10 +15,10 @@ const CustomizedButton = (props: CustomizedButtonType): ReactNode => {
   const setNewColor = (newColor: string) => {
     const newState = { ...style };
     newState.backgroundColor = newColor;
-        console.log(style);
+        // console.log(style);
 
     setStyle(newState);
-    console.log(style);
+    // console.log(style);
   };
   const inHover = (e: any) => {
     if (props.onHoverStyle == null) return;

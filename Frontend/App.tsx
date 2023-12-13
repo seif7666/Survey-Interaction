@@ -17,7 +17,6 @@ export default function App() {
           name="Home"
           component={HomeScreen}
           options={{animation:'fade',headerLargeTitle:true,statusBarColor:'#31304D', header:()=><></>}}
-          // options={{title: 'Welcome'}}
         />
         <Stack.Screen name="profile" component={Profile} />
       </Stack.Navigator>
