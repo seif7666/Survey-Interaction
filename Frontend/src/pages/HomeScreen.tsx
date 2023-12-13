@@ -37,15 +37,15 @@ const styles= StyleSheet.create({
 const HomeScreen=()=>{
     const navigation=useNavigation();
     const onPress=(e:any)=>{
-        navigation.navigate('profile',{})
+        navigation.navigate('Surveys',{})
     };
     return (
         <View style={styles.screen} >
             <View>
             <Text style={styles.title}>Survey Interaction Program!</Text>
             </View>
-            <CustomizedButton onPress={onPress} title="Solve Survey" onHoverStyle={styles.buttonHover.backgroundColor} buttonStyle={styles.buttonStyle} textStyle={styles.buttonText}/>
-            <CustomizedButton onPress={()=>{}} title="See All Responses" onHoverStyle={styles.buttonHover.backgroundColor} buttonStyle={styles.buttonStyle} textStyle={styles.buttonText}/>
+            <CustomizedButton onPress={onPress} title="Solve Survey"  buttonStyle={styles.buttonStyle} textStyle={styles.buttonText}/>
+            <CustomizedButton onPress={()=>{}} title="See All Responses"  buttonStyle={styles.buttonStyle} textStyle={styles.buttonText}/>
         </View>
     )
 }

@@ -1,6 +1,8 @@
 import React from 'react'
 import { Pressable, StyleSheet, Text } from 'react-native'
 import { SurveyHeader } from '../../model/SurveyHeader'
+import { useNavigation } from '@react-navigation/native';
+import CustomizedButton from '../button';
 
 const styles=StyleSheet.create({
     pressable:{
@@ -24,11 +26,13 @@ type surveyHeaderType={
     surveyHeader:SurveyHeader
 };
 const SurveyHeaderComponent = (props:surveyHeaderType) => {
-  return (
-    <Pressable style={styles.pressable}>
-        <Text style={styles.text}>Survey: {props.surveyHeader.getTitle()}</Text>
+    const navigator=useNavigation();
 
-    </Pressable>
+    const onPress=()=>{
+        navigator.navigate('Survey',{survey_id:props.surveyHeader.getID()});
+    }
+  return (
+    <CustomizedButton title={`Survey: ${props.surveyHeader.getTitle()}`} onPress={onPress} textStyle={styles.text} buttonStyle={Pressable}/>
   )
 }
 

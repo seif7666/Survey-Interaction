@@ -1,5 +1,8 @@
+import axios from "axios";
+import { Survey } from "../model/Survey";
 import { SurveyHeader } from "../model/SurveyHeader";
 import axiosInstance from "./axios"
+import { QuestionFactory } from "../model/Question";
 
 export async function getSurveyHeaders():Promise<SurveyHeader[]>{
 
@@ -14,3 +17,14 @@ export async function getSurveyHeaders():Promise<SurveyHeader[]>{
     return headers;
 }
 
+export async function getSurvey(id:number):Promise<Survey>{
+    const response= await axiosInstance.get(`survey/${id}`);
+    const data=response.data;
+    const survey= new Survey(new SurveyHeader(data.id,data.name));
+    for(let i=0;i<data.questions.length;i++){
+        survey.addQuestion(QuestionFactory.getQuestion(data.questions[i]));
+    }
+    console.log(`Survey is ${survey.getHeader()}`);
+    return survey;
+
+}
